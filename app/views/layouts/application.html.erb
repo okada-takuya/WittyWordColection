@@ -8,33 +8,55 @@
   </head>
 
   <body>
-    <div id="wrapper">
-      <div id="sidebar-wrapper">
-        <ul class="sidebar-nav">
-          <li class="sidebar-brand">
-            <a href="/welcome#index">
-              WittyWordColection
-            </a>
-          </li>
-          <li>
-            <a href="#">Dashboard</a>
-          </li>
-        </ul>
-      </div>
+    <nav class="navbar navbar-default" role="navigation">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <a class="navbar-brand" href="/">WittyWordCollection</a>
+        </div>
 
-      <div id="page-content-wrapper">
-        <div class="container-fluid">
-          <div class="row">
-            <div class="col-lg-12">
-              <% flash.each do |name, msg| %>
-                <div class="alert alert-<%= name %>">
-                  <button type="button" class="close" data-dismiss="alert">×</button>
-                  <%= msg %>
-                </div>
-              <% end %>
-              <%= yield %>
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav">
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">Words<span class="caret"></span></a>
+              <ul class="dropdown-menu" role="menu">
+                <li><a href="/words">index</a></li>
+              </ul>
+            </li>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">People<span class="caret"></span></a>
+              <ul class="dropdown-menu" role="menu">
+                <li><a href="/people">index</a></li>
+                <li class="divider"></li>
+                <li><a href="/people/new">New</a></li>
+              </ul>
+            </li>
+          </ul>
+          <%= form_tag( { controller: "words", action: "create"}, {class: "navbar-form navbar-left form-inline"} ) do %>
+            <div class="form-group">
+              <%= text_field_tag "speaker", nil, placeholder: "Speaker", class: "form-control" %>
             </div>
-          </div>
+            <div class="form-group">
+              <%= text_field_tag "description", nil, placeholder: "Description", class: "form-control" %>
+            </div>
+            <div class="form-group">
+              <%= text_field_tag "registrant", nil, placeholder: "Registrant", class: "form-control" %>
+            </div>
+            <button type="submit" class="btn btn-info">Submit</button>
+          <% end %>
+        </div>
+      </div>
+    </nav>
+
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-lg-12">
+          <% flash.each do |name, msg| %>
+            <div class="alert alert-<%= name %>">
+              <button type="button" class="close" data-dismiss="alert">×</button>
+              <%= msg %>
+            </div>
+          <% end %>
+          <%= yield %>
         </div>
       </div>
     </div>

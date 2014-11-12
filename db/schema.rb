@@ -21,8 +21,9 @@ ActiveRecord::Schema.define(version: 20141112121632) do
 
   create_table "words", force: true do |t|
     t.string   "description"
-    t.integer  "count",       default: 0
-    t.integer  "person_id"
+    t.integer  "count",         default: 0
+    t.integer  "speaker_id"
+    t.integer  "registrant_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

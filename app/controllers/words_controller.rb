@@ -1,5 +1,5 @@
 class WordsController < ApplicationController
-  before_action :set_word, only: [:show, :edit, :update, :destroy]
+  before_action :set_word, only: [:show, :edit, :update, :destroy, :vote]
 
   # GET /words
   # GET /words.json
@@ -24,7 +24,16 @@ class WordsController < ApplicationController
   # POST /words
   # POST /words.json
   def create
-    @word = Word.new(word_params)
+    speaker = Person.find_by(name: params[:speaker])
+    registrant = Person.find_by(name: params[:registrant])
+    speaker_id = speaker.id unless speaker.nil?
+    registrant_id = registrant.id unless registrant.nil?
+
+    @word = Word.new(
+      description: params[:description],
+      speaker_id: speaker_id,
+      registrant_id: registrant_id,
+    )
 
     respond_to do |format|
       if @word.save
@@ -61,6 +70,12 @@ class WordsController < ApplicationController
     end
   end
 
+  def vote
+    @word.update_attribute(:count, (@word.count + 1))
+    flash[:success] = "Word was successfully updated."
+    redirect_to :back
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_word
@@ -69,6 +84,6 @@ class WordsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def word_params
-      params.require(:word).permit(:description, :count, :person_id)
+      params.require(:word).permit(:description, :count, :speaker_id, :registrant_id)
     end
 end
