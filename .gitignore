@@ -1,0 +1,25 @@
+# Ignore bundler config.
+/.bundle
+
+# Ignore the default SQLite database.
+/db/*.sqlite3
+/db/*.sqlite3-journal
+
+# Ignore all logfiles and tempfiles.
+/log
+/tmp
+*.swp
+*~
+.project
+
+# Ignore a setting file of Finder
+.DS_Store
+
+# Ignore yml file of api_token of toggl
+local/toggl.yml
+
+# Ignore gemfiles
+vendor/bundle
+
+# Ignore todo list
+TODO.org
