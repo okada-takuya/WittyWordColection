@@ -23,3 +23,6 @@ vendor/bundle
 
 # Ignore todo list
 TODO.org
+
+# Ignore assets compiled files
+/public/assets/
