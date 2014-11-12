@@ -1,14 +1,42 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <title>WittyWordColection</title>
-  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
-  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
-  <%= csrf_meta_tags %>
-</head>
-<body>
+  <head>
+    <title>WittyWordColection</title>
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+    <%= csrf_meta_tags %>
+  </head>
 
-<%= yield %>
+  <body>
+    <div id="wrapper">
+      <div id="sidebar-wrapper">
+        <ul class="sidebar-nav">
+          <li class="sidebar-brand">
+            <a href="/welcome#index">
+              WittyWordColection
+            </a>
+          </li>
+          <li>
+            <a href="#">Dashboard</a>
+          </li>
+        </ul>
+      </div>
 
-</body>
+      <div id="page-content-wrapper">
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-lg-12">
+              <% flash.each do |name, msg| %>
+                <div class="alert alert-<%= name %>">
+                  <button type="button" class="close" data-dismiss="alert">×</button>
+                  <%= msg %>
+                </div>
+              <% end %>
+              <%= yield %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
 </html>
